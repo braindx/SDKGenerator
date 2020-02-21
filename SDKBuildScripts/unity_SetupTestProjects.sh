@@ -90,7 +90,6 @@ MainScript () {
 }
 
 CheckDefault WORKSPACE "C:/proj"
-CheckDefault SHARED_WORKSPACE "C:/depot"
 CheckDefault SdkName "UnitySDK"
 CheckDefault UNITY_VERSION "Unity193"
 

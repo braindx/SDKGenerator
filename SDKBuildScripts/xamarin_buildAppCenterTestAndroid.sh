@@ -24,7 +24,7 @@ ExitIfError() {
 }
 
 CopyTestTitleData() {
-    cp -f "$PF_TEST_TITLE_DATA_JSON" "$AndroidProjectPath/XamarinTestRunner/XamarinTestRunner/testTitleData.json"
+    cp -f "$WORKSPACE/JenkinsSdkSetupScripts/Creds/testTitleData.json" "$AndroidProjectPath/XamarinTestRunner/XamarinTestRunner/testTitleData.json"
     ExitIfError
 }
 
