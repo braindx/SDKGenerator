@@ -1,4 +1,7 @@
 #!/bin/bash
+
+set -e
+
 pushd ../../sdks/$SdkName/build/Android
 AndroidProjectPath=$PWD
 popd
@@ -7,31 +10,18 @@ debugApkPath=$AndroidProjectPath/app/build/outputs/apk/debug/app-debug.apk
 releaseApkPath=$AndroidProjectPath/app/build/outputs/apk/release/app-release-unsigned.apk
 testAssemblyDir="$1"
 
-ExitIfError() {
-    # TODO: Consider replacing this entire pattern with "set -e" which will accomplish the same pattern much simpler
-    ErrorStatus=$?
-    if [ $ErrorStatus -ne 0 ]; then
-        echo "Exiting with Error Code: $ErrorStatus" >&2
-        exit 1
-    fi
-}
-
 CopyTestTitleData() {
     cp -f "$WORKSPACE/JenkinsSdkSetupScripts/Creds/testTitleData.json" "$AndroidProjectPath/app/src/main/assets"
-    ExitIfError
 }
 
 BuildAPK() {
     pushd "$AndroidProjectPath"
-    ExitIfError
 
     # "assembleDebug" Builds the Debug APK
     ./gradlew assembleDebug
-    ExitIfError
 
     # "build" Builds the Debug and Release APK's
     # ./gradlew build
-    # ExitIfError
 
     if [ ! -f "$debugApkPath" ]; then
         echo "Expected debug APK file was not created"
@@ -64,8 +54,6 @@ TestAPK() {
         --build-dir "$testAssemblyDir"  \
         --uitest-tools-dir "$XAMARIN_UITEST_TOOLS"
     fi
-
-    ExitIfError
 }
 
 DoWork() {

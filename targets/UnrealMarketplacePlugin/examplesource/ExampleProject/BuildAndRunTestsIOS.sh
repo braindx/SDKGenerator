@@ -14,7 +14,7 @@ fi
 rm -fdr $archivePath/IOS
 
 #inject the testTitleData into the project prior to build
-cp "$WORKSPACE/JenkinsSdkSetupScripts/Creds/testTitleData.json" "$projectPath/Content/TestTitleData"
+cp -f "$WORKSPACE/JenkinsSdkSetupScripts/Creds/testTitleData.json" "$projectPath/Content/TestTitleData"
 
 #build the archive
 . ./BuildIOS.sh $archivePath $projectPath
